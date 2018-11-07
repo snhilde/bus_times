@@ -9,16 +9,15 @@ import time
 stop_id_re = re.compile('^\d{2,5}$')
 nt_url_base = "http://svc.metrotransit.org/NexTrip/"
 
-stop_id_list = []
-json_list = []
-    
 def usage():
     print("Usage:")
     print("\tpybus {stop_id}")
     print("To get departure times for stop 123:")
     print("\tpybus 123")
     
-def check_args():
+def check_args() -> list:
+    stop_id_list = []
+    
     if len(sys.argv) == 1:
         usage()
         exit()
@@ -26,6 +25,8 @@ def check_args():
     for id in sys.argv[1:]:
         if stop_id_re.match(id):
             stop_id_list.append(id)
+            
+    return stop_id_list
         
 def get_minutes_left(timestamp:int, departure_str:str) -> int:
     time = departure_str.split('(')[1].split(')')[0].split('-')[0]
@@ -64,14 +65,14 @@ def print_times(busses_json:json.loads):
         else:
             minutes_left = get_minutes_left(timestamp, bus["DepartureTime"])
             print("Rte {}: {} (Scheduled, {} min.)".format(route, departure_time, minutes_left))
-    
+            
 def main():
-    check_args()
-        
+    stop_id_list = check_args()
     get_times()
+    sort_times()
     
-    print_header(stop_id)
-    print_times(busses)
+    #  print_header(stop_id)
+    #  print_times(busses)
         
 if __name__ == '__main__':
     main()
