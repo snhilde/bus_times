@@ -18,13 +18,13 @@ def usage():
 def check_args() -> list:
     stop_id_list = []
     
-    if len(sys.argv) == 1:
-        usage()
-        exit()
-        
     for id in sys.argv[1:]:
         if stop_id_re.match(id):
             stop_id_list.append(id)
+            
+    if not stop_id_list:
+        usage()
+        exit()
                 
     return stop_id_list
         
