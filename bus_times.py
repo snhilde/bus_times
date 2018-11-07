@@ -36,7 +36,7 @@ def get_minutes_left(timestamp:int, departure_str:str) -> int:
     
     return int(seconds_left / 60)
     
-def get_times(stop_id_list) -> list:
+def get_times(stop_id_list:list) -> list:
     json_list = []
             
     for stop_id in stop_id_list:
@@ -50,7 +50,7 @@ def get_times(stop_id_list) -> list:
                 
     return json_list
     
-def print_header(stop_id:int):
+def print_header(stop_id_list:list):
     print()
     print("Bus times for stop {}".format(stop_id))
     print()
@@ -70,7 +70,7 @@ def print_times(busses_json:json.loads):
             minutes_left = get_minutes_left(timestamp, bus["DepartureTime"])
             print("Rte {}: {} (Scheduled, {} min.)".format(route, departure_time, minutes_left))
             
-def sort_times(json_list) -> list:
+def sort_times(json_list:list) -> list:
     busses = []
     for busses_json in json_list:
         for bus in busses_json:
@@ -85,7 +85,7 @@ def main():
     json_list = get_times(stop_id_list)
     busses = sort_times(json_list)
     
-    #  print_header(stop_id)
+    print_header(stop_id_list)
     #  print_times(busses)
         
 if __name__ == '__main__':
