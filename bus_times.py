@@ -36,7 +36,9 @@ def get_minutes_left(timestamp:int, departure_str:str) -> int:
     
     return int(seconds_left / 60)
     
-def get_times():
+def get_times(stop_id_list) -> list:
+    json_list = []
+            
     for stop_id in stop_id_list:
         url = "{}{}?format=json".format(nt_url_base, stop_id)
         response = requests.get(url)
@@ -45,6 +47,8 @@ def get_times():
             json_list.append(json.loads(response.content.decode('utf-8')))
         else:
             print("Error getting times for stop {}".format(stop_id))
+            
+    return json_list
     
 def print_header(stop_id:int):
     print()
@@ -80,7 +84,7 @@ def sort_times():
     
 def main():
     stop_id_list = check_args()
-    get_times()
+    get_times(stop_id_list)
     sort_times()
     
     #  print_header(stop_id)
