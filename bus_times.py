@@ -35,7 +35,7 @@ def get_minutes_left(timestamp:int, departure_str:str) -> int:
     
     return int(seconds_left / 60)
     
-def get_times() -> json.loads:
+def get_times():
     for stop_id in stop_id_list:
         url = "{}{}?format=json".format(nt_url_base, stop_id)
         response = requests.get(url)
@@ -68,7 +68,7 @@ def print_times(busses_json:json.loads):
 def main():
     check_args()
         
-    busses = get_times(stop_id)
+    busses = get_times()
     
     print_header(stop_id)
     print_times(busses)
