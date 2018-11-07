@@ -63,6 +63,7 @@ def print_times(busses:list):
     
     for bus in busses:
         route = bus["Route"]
+        route = route + " " * (max_route_number_length - len(route))
         departure_time = bus["DepartureText"]
         
         if bus["Actual"]:
