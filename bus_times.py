@@ -47,7 +47,7 @@ def get_times(stop_id_list) -> list:
             json_list.append(json.loads(response.content.decode('utf-8')))
         else:
             print("Error getting times for stop {}".format(stop_id))
-            
+                
     return json_list
     
 def print_header(stop_id:int):
@@ -70,22 +70,20 @@ def print_times(busses_json:json.loads):
             minutes_left = get_minutes_left(timestamp, bus["DepartureTime"])
             print("Rte {}: {} (Scheduled, {} min.)".format(route, departure_time, minutes_left))
             
-def sort_times():
-    master_list = []
+def sort_times(json_list):
+    busses = []
     for busses_json in json_list:
         for bus in busses_json:
-            master_list.append(bus)
-    for bus in master_list:
-        print(bus['DepartureTime'])
-    print()
-    master_list.sort(key=lambda x: x['DepartureTime'])
-    for bus in master_list:
-        print(bus['DepartureTime'])
+            busses.append(bus)
+            
+    busses.sort(key=lambda x: x['DepartureTime'])
+        
+    return busses
     
 def main():
     stop_id_list = check_args()
-    get_times(stop_id_list)
-    sort_times()
+    json_list = get_times(stop_id_list)
+    busses = sort_times(json_list)
     
     #  print_header(stop_id)
     #  print_times(busses)
