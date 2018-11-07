@@ -68,7 +68,7 @@ def print_times(busses_json:json.loads):
 def main():
     check_args()
         
-    busses = get_times()
+    get_times()
     
     print_header(stop_id)
     print_times(busses)
