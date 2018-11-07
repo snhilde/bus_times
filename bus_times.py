@@ -70,7 +70,7 @@ def print_times(busses_json:json.loads):
             minutes_left = get_minutes_left(timestamp, bus["DepartureTime"])
             print("Rte {}: {} (Scheduled, {} min.)".format(route, departure_time, minutes_left))
             
-def sort_times(json_list):
+def sort_times(json_list) -> list:
     busses = []
     for busses_json in json_list:
         for bus in busses_json:
