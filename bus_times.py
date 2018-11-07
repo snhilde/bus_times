@@ -52,7 +52,7 @@ def get_times(stop_id_list:list) -> list:
     
 def print_header(stop_id_list:list):
     print()
-    print("Bus times for stop {}".format(stop_id))
+    print("Bus times for stop {}".format(stop_id_list))
     print()
     print("Current time: {}".format(time.strftime('%I:%M')))
     print()
