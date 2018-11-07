@@ -1,11 +1,14 @@
 #! /bin/python3.7
 
 import json
+import re
 import requests
 import sys
 import time
 
+stop_id_re = re.compile('^\d{2,5}$')
 nt_url_base = "http://svc.metrotransit.org/NexTrip/"
+stop_id_list = []
     
 def usage():
     print("Usage:")
@@ -14,9 +17,13 @@ def usage():
     print("\tpybus 123")
     
 def check_args():
-    if len(sys.argv) != 2:
+    if len(sys.argv) == 1:
         usage()
         exit()
+        
+    for id in sys.argv[1:]:
+        if stop_id_re.match(id):
+            stop_id_list.append(id)
         
 def get_minutes_left(timestamp:int, departure_str:str) -> int:
     time = departure_str.split('(')[1].split(')')[0].split('-')[0]
