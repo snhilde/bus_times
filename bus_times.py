@@ -25,7 +25,7 @@ def check_args() -> list:
     for id in sys.argv[1:]:
         if stop_id_re.match(id):
             stop_id_list.append(id)
-            
+                
     return stop_id_list
         
 def get_minutes_left(timestamp:int, departure_str:str) -> int:
@@ -66,6 +66,18 @@ def print_times(busses_json:json.loads):
             minutes_left = get_minutes_left(timestamp, bus["DepartureTime"])
             print("Rte {}: {} (Scheduled, {} min.)".format(route, departure_time, minutes_left))
             
+def sort_times():
+    master_list = []
+    for busses_json in json_list:
+        for bus in busses_json:
+            master_list.append(bus)
+    for bus in master_list:
+        print(bus['DepartureTime'])
+    print()
+    master_list.sort(key=lambda x: x['DepartureTime'])
+    for bus in master_list:
+        print(bus['DepartureTime'])
+    
 def main():
     stop_id_list = check_args()
     get_times()
