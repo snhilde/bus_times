@@ -51,11 +51,15 @@ def get_times(stop_id_list:list) -> list:
     return json_list
     
 def print_header(stop_id_list:list):
-    print()
-    print("Bus times for stop {}".format(stop_id_list))
-    print()
-    print("Current time: {}".format(time.strftime('%I:%M')))
-    print()
+    stop_id_string = ", ".join(stop_id_list)
+    
+    print("\nBus times for stop", end='')
+    
+    if len(stop_id_list) > 1:
+        print("s", end='')
+        
+    print(" {}\n".format(stop_id_string))
+    print("Current time: {}\n".format(time.strftime('%I:%M')))
     
 def print_times(busses:list):
     timestamp = time.time()
