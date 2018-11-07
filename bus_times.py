@@ -8,7 +8,9 @@ import time
 
 stop_id_re = re.compile('^\d{2,5}$')
 nt_url_base = "http://svc.metrotransit.org/NexTrip/"
+
 stop_id_list = []
+json_list = []
     
 def usage():
     print("Usage:")
@@ -33,14 +35,15 @@ def get_minutes_left(timestamp:int, departure_str:str) -> int:
     
     return int(seconds_left / 60)
     
-def get_times(stop_id:int) -> json.loads:
-    url = "{}{}?format=json".format(nt_url_base, stop_id)
-    response = requests.get(url)
-    
-    if response.status_code == 200:
-        return json.loads(response.content.decode('utf-8'))
-    else:
-        return None
+def get_times() -> json.loads:
+    for stop_id in stop_id_list:
+        url = "{}{}?format=json".format(nt_url_base, stop_id)
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            json_list.append(json.loads(response.content.decode('utf-8')))
+        else:
+            print("Error getting times for stop {}".format(stop_id))
     
 def print_header(stop_id:int):
     print()
