@@ -59,6 +59,7 @@ def print_header(stop_id_list:list):
     
 def print_times(busses:list):
     timestamp = time.time()
+    max_route_number_length = max(len(bus['Route']) for bus in busses)
     
     for bus in busses:
         route = bus["Route"]
