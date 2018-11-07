@@ -84,7 +84,7 @@ def main():
     stop_id_list = check_args()
     json_list = get_times(stop_id_list)
     busses = sort_times(json_list)
-        
+    
     print_header(stop_id_list)
     print_times(busses)
         
