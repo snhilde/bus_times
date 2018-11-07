@@ -71,11 +71,7 @@ def print_times(busses:list):
             print("Rte {}: {} (Scheduled, {} min.)".format(route, departure_time, minutes_left))
             
 def sort_times(json_list:list) -> list:
-    busses = []
-    for busses_json in json_list:
-        for bus in busses_json:
-            busses.append(bus)
-            
+    busses = [bus for busses_json in json_list for bus in busses_json]
     busses.sort(key=lambda x: x['DepartureTime'])
         
     return busses
