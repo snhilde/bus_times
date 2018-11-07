@@ -33,15 +33,6 @@ def get_minutes_left(timestamp:int, departure_str:str) -> int:
     
     return int(seconds_left / 60)
     
-def get_stop_id() -> int:
-    try:
-        stop_id = int(sys.argv[1])
-    except ValueError:
-        usage()
-        exit()
-            
-    return stop_id
-        
 def get_times(stop_id:int) -> json.loads:
     url = "{}{}?format=json".format(nt_url_base, stop_id)
     response = requests.get(url)
@@ -73,7 +64,6 @@ def print_times(busses_json:json.loads):
     
 def main():
     check_args()
-    stop_id = get_stop_id()
         
     busses = get_times(stop_id)
     
