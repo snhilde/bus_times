@@ -57,10 +57,10 @@ def print_header(stop_id_list:list):
     print("Current time: {}".format(time.strftime('%I:%M')))
     print()
     
-def print_times(busses_json:json.loads):
+def print_times(busses:list):
     timestamp = time.time()
     
-    for bus in busses_json:
+    for bus in busses:
         route = bus["Route"]
         departure_time = bus["DepartureText"]
         
@@ -84,9 +84,9 @@ def main():
     stop_id_list = check_args()
     json_list = get_times(stop_id_list)
     busses = sort_times(json_list)
-    
+        
     print_header(stop_id_list)
-    #  print_times(busses)
+    print_times(busses)
         
 if __name__ == '__main__':
     main()
