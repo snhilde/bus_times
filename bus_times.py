@@ -11,9 +11,9 @@ nt_url_base = "http://svc.metrotransit.org/NexTrip/"
 
 def usage():
     print("Usage:")
-    print("\tpybus {stop_id}")
-    print("To get departure times for stop 123:")
-    print("\tpybus 123")
+    print("\tbus_times {stop_id(s)}")
+    print("To get sorted departure times for stops 123 and 456:")
+    print("\tbus_times 123 456")
     
 def check_args() -> list:
     stop_id_list = []
